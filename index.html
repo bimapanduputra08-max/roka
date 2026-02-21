@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roka Ramen — Umbulharjo, Yogyakarta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;900&family=Shippori+Mincho:wght@400;600;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1208;
+    --cream: #f5ead6;
+    --amber: #c8730a;
+    --amber-light: #e8952a;
+    --red: #b83232;
+    --mist: #ede4d3;
+    --stone: #8a7a62;
+    --paper: #fdf6e8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.35;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.25rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(26,18,8,0.95), transparent);
+  }
+
+  .nav-logo {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--amber-light);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--cream); opacity: 0.7; }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2.5rem;
+  }
+
+  nav a {
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    transition: opacity 0.3s, color 0.3s;
+  }
+
+  nav a:hover { opacity: 1; color: var(--amber-light); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 6rem 2rem 4rem;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 70% at 70% 50%, rgba(200,115,10,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 50% at 20% 80%, rgba(184,50,50,0.12) 0%, transparent 50%),
+      linear-gradient(160deg, #1a1208 0%, #261c0e 50%, #1a1208 100%);
+  }
+
+  /* Japanese circle decoration */
+  .hero-circle {
+    position: absolute;
+    right: 8%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    border: 1px solid rgba(200,115,10,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: rotate-slow 40s linear infinite;
+  }
+
+  .hero-circle::before {
+    content: '';
+    position: absolute;
+    inset: 20px;
+    border-radius: 50%;
+    border: 1px dashed rgba(200,115,10,0.12);
+  }
+
+  .hero-circle-inner {
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,115,10,0.15) 0%, rgba(200,115,10,0.05) 50%, transparent 70%);
+    border: 1px solid rgba(200,115,10,0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    animation: rotate-slow 40s linear infinite reverse;
+  }
+
+  .kanji-large {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 5rem;
+    font-weight: 900;
+    color: var(--amber);
+    line-height: 1;
+    text-shadow: 0 0 60px rgba(200,115,10,0.4);
+  }
+
+  .kanji-sub {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 0.7rem;
+    color: var(--stone);
+    letter-spacing: 0.3em;
+  }
+
+  @keyframes rotate-slow {
+    from { transform: translateY(-50%) rotate(0deg); }
+    to { transform: translateY(-50%) rotate(360deg); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 580px;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: rgba(200,115,10,0.15);
+    border: 1px solid rgba(200,115,10,0.3);
+    border-radius: 2px;
+    padding: 0.35rem 0.9rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber-light);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-tag::before {
+    content: '◆';
+    font-size: 0.5rem;
+  }
+
+  .hero-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(3.5rem, 8vw, 6.5rem);
+    font-weight: 800;
+    line-height: 0.95;
+    margin-bottom: 0.5rem;
+    color: var(--cream);
+  }
+
+  .hero-title .accent {
+    color: var(--amber);
+    display: block;
+  }
+
+  .hero-title .jp {
+    font-size: 0.4em;
+    letter-spacing: 0.3em;
+    color: var(--stone);
+    display: block;
+    margin-top: 0.3em;
+    font-weight: 400;
+  }
+
+  .hero-desc {
+    margin-top: 2rem;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: rgba(245,234,214,0.65);
+    max-width: 420px;
+    font-weight: 300;
+  }
+
+  .hero-cta {
+    margin-top: 3rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .btn-primary {
+    background: var(--amber);
+    color: var(--ink);
+    padding: 0.9rem 2rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+
+  .btn-primary:hover {
+    background: var(--amber-light);
+    transform: translateY(-2px);
+  }
+
+  .btn-ghost {
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    opacity: 0.6;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: opacity 0.3s;
+  }
+
+  .btn-ghost:hover { opacity: 1; }
+
+  .hero-stats {
+    margin-top: 4rem;
+    display: flex;
+    gap: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(200,115,10,0.15);
+  }
+
+  .stat { }
+  .stat-num {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--amber);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-top: 0.3rem;
+  }
+
+  /* ── SECTION BASE ── */
+  section { position: relative; overflow: hidden; }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    height: 1px;
+    width: 60px;
+    background: var(--amber);
+    opacity: 0.4;
+  }
+
+  .section-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--cream);
+  }
+
+  /* ── STORY ── */
+  .story {
+    padding: 8rem 3rem;
+    background: linear-gradient(180deg, var(--ink) 0%, #211508 100%);
+  }
+
+  .story-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .story-visual {
+    position: relative;
+  }
+
+  .story-card {
+    background: linear-gradient(135deg, #2a1c0d, #1f1508);
+    border: 1px solid rgba(200,115,10,0.15);
+    padding: 2.5rem;
+    position: relative;
+  }
+
+  .story-card::before {
+    content: 'ろか';
+    position: absolute;
+    top: -1.5rem;
+    right: 1.5rem;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 5rem;
+    font-weight: 900;
+    color: rgba(200,115,10,0.08);
+    line-height: 1;
+  }
+
+  .date-badge {
+    display: inline-block;
+    background: var(--amber);
+    color: var(--ink);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .story-card p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: rgba(245,234,214,0.7);
+    font-weight: 300;
+  }
+
+  .founder-line {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(200,115,10,0.15);
+    font-size: 0.8rem;
+    color: var(--stone);
+    letter-spacing: 0.05em;
+  }
+
+  .founder-line strong { color: var(--amber-light); }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .timeline-item {
+    display: flex;
+    gap: 1.5rem;
+    position: relative;
+  }
+
+  .timeline-item:not(:last-child) .tl-line {
+    position: absolute;
+    left: 0.85rem;
+    top: 2.2rem;
+    bottom: -1px;
+    width: 1px;
+    background: linear-gradient(to bottom, rgba(200,115,10,0.4), rgba(200,115,10,0.1));
+  }
+
+  .tl-dot {
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    border: 1px solid var(--amber);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.2rem;
+  }
+
+  .tl-dot::after {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--amber);
+  }
+
+  .tl-content {
+    padding-bottom: 2.5rem;
+  }
+
+  .tl-date {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 0.3rem;
+  }
+
+  .tl-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 0.4rem;
+  }
+
+  .tl-desc {
+    font-size: 0.85rem;
+    color: rgba(245,234,214,0.5);
+    line-height: 1.6;
+  }
+
+  /* ── PROCESS ── */
+  .process {
+    padding: 8rem 3rem;
+    background: #1c1309;
+  }
+
+  .process-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .process-header {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  .process-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: rgba(200,115,10,0.15);
+  }
+
+  .process-card {
+    background: #1c1309;
+    padding: 3rem 2.5rem;
+    position: relative;
+    transition: background 0.4s;
+  }
+
+  .process-card:hover {
+    background: #211508;
+  }
+
+  .process-num {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 4.5rem;
+    font-weight: 900;
+    color: rgba(200,115,10,0.08);
+    line-height: 1;
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+  }
+
+  .process-icon {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .process-time {
+    display: inline-block;
+    border: 1px solid rgba(200,115,10,0.4);
+    color: var(--amber-light);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.7rem;
+    margin-bottom: 1rem;
+  }
+
+  .process-card h3 {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 0.75rem;
+  }
+
+  .process-card p {
+    font-size: 0.875rem;
+    line-height: 1.75;
+    color: rgba(245,234,214,0.55);
+  }
+
+  /* ── MENU ── */
+  .menu {
+    padding: 8rem 3rem;
+    background: linear-gradient(180deg, #1c1309, var(--ink));
+  }
+
+  .menu-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
+  }
+
+  .menu-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .tab-btn {
+    background: none;
+    border: 1px solid rgba(200,115,10,0.2);
+    color: rgba(245,234,214,0.5);
+    padding: 0.5rem 1.25rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .tab-btn.active, .tab-btn:hover {
+    background: var(--amber);
+    border-color: var(--amber);
+    color: var(--ink);
+  }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: rgba(200,115,10,0.1);
+  }
+
+  .menu-item {
+    background: var(--ink);
+    padding: 1.75rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    transition: background 0.3s;
+    cursor: pointer;
+  }
+
+  .menu-item:hover { background: #1f1509; }
+
+  .menu-item.bestseller {
+    position: relative;
+  }
+
+  .menu-item.bestseller::before {
+    content: '★ Best Seller';
+    position: absolute;
+    top: 0; right: 0;
+    background: var(--red);
+    color: white;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    padding: 0.2rem 0.6rem;
+    font-weight: 600;
+  }
+
+  .menu-name {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 0.3rem;
+  }
+
+  .menu-desc {
+    font-size: 0.78rem;
+    color: var(--stone);
+    line-height: 1.5;
+  }
+
+  .menu-price {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--amber);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .menu-note {
+    margin-top: 2rem;
+    padding: 1.25rem 1.5rem;
+    background: rgba(200,115,10,0.06);
+    border-left: 2px solid var(--amber);
+    font-size: 0.82rem;
+    color: rgba(245,234,214,0.5);
+    line-height: 1.6;
+  }
+
+  .menu-note strong { color: var(--amber-light); }
+
+  /* ── VIBE / EXPERIENCE ── */
+  .vibe {
+    padding: 8rem 3rem;
+    background: #160f06;
+  }
+
+  .vibe-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .vibe-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 2rem;
+  }
+
+  .pill {
+    background: rgba(200,115,10,0.1);
+    border: 1px solid rgba(200,115,10,0.2);
+    color: var(--amber-light);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    padding: 0.4rem 0.9rem;
+    border-radius: 2px;
+  }
+
+  .vibe-features {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5px;
+    background: rgba(200,115,10,0.08);
+  }
+
+  .vibe-feature {
+    background: #160f06;
+    padding: 1.75rem 2rem;
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+    transition: background 0.3s;
+  }
+
+  .vibe-feature:hover { background: #1c1309; }
+
+  .feat-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .feat-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 0.3rem;
+  }
+
+  .feat-desc {
+    font-size: 0.82rem;
+    color: rgba(245,234,214,0.5);
+    line-height: 1.6;
+  }
+
+  /* ── VISIT ── */
+  .visit {
+    padding: 8rem 3rem;
+    background: var(--ink);
+    text-align: center;
+  }
+
+  .visit-inner {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .visit-inner .section-label {
+    justify-content: center;
+  }
+
+  .visit-inner .section-label::after { display: none; }
+
+  .info-grid {
+    margin-top: 4rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: rgba(200,115,10,0.12);
+    text-align: left;
+    max-width: 800px;
+    margin-inline: auto;
+    margin-top: 4rem;
+  }
+
+  .info-card {
+    background: var(--ink);
+    padding: 2rem;
+  }
+
+  .info-icon {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .info-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 0.6rem;
+  }
+
+  .info-val {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--cream);
+    line-height: 1.5;
+  }
+
+  .info-sub {
+    font-size: 0.78rem;
+    color: var(--stone);
+    margin-top: 0.3rem;
+  }
+
+  .visit-cta {
+    margin-top: 4rem;
+    padding: 3rem;
+    background: linear-gradient(135deg, rgba(200,115,10,0.12), rgba(184,50,50,0.08));
+    border: 1px solid rgba(200,115,10,0.2);
+  }
+
+  .visit-cta p {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+  }
+
+  .visit-cta .hint {
+    font-size: 0.82rem;
+    color: var(--stone);
+    font-style: italic;
+    margin-top: 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 3rem;
+    border-top: 1px solid rgba(200,115,10,0.12);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #110d06;
+  }
+
+  .footer-logo {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--amber);
+  }
+
+  .footer-copy {
+    font-size: 0.78rem;
+    color: var(--stone);
+  }
+
+  .footer-jp {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 0.7rem;
+    color: rgba(200,115,10,0.3);
+    letter-spacing: 0.2em;
+  }
+
+  /* ── DIVIDER ── */
+  .jp-divider {
+    text-align: center;
+    padding: 2rem;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.5em;
+    color: rgba(200,115,10,0.2);
+    background: #160f06;
+  }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    nav ul { gap: 1.5rem; }
+    .hero-circle { display: none; }
+    .hero-content { max-width: 100%; }
+    .hero-stats { gap: 2rem; }
+    .story-grid, .vibe-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .process-cards { grid-template-columns: 1fr; }
+    .menu-grid { grid-template-columns: 1fr; }
+    .info-grid { grid-template-columns: 1fr; }
+    .menu-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">ROKA <span>ろか</span></a>
+  <ul>
+    <li><a href="#story">Story</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#vibe">Suasana</a></li>
+    <li><a href="#visit">Kunjungi</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-circle">
+    <div class="hero-circle-inner">
+      <div class="kanji-large">ろか</div>
+      <div class="kanji-sub">ROKA RAMEN</div>
+    </div>
+  </div>
+  <div class="hero-content reveal">
+    <div class="hero-tag">Authentic Japanese Ramen · Yogyakarta</div>
+    <h1 class="hero-title">
+      Semangkuk
+      <span class="accent">Ramen</span>
+      <span class="jp">八時間の愛情 — Delapan Jam Penuh Cinta</span>
+    </h1>
+    <p class="hero-desc">
+      Dibuat dari nol. Kuah direbus 8 jam, tare dimasak 24 jam, ajitama direndam 2 hari. Bukan sekadar ramen — ini adalah dedikasi dalam semangkuk.
+    </p>
+    <div class="hero-cta">
+      <a href="#menu" class="btn-primary">Lihat Menu</a>
+      <a href="#visit" class="btn-ghost">
+        📍 Umbulharjo, Jogja →
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">300</div>
+        <div class="stat-label">Mangkuk / Hari</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">8 Jam</div>
+        <div class="stat-label">Rebus Kaldu</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">2022</div>
+        <div class="stat-label">Berdiri</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="jp-divider">◆ &nbsp; 情熱のラーメン &nbsp; ◆ &nbsp; PASSION IN EVERY BOWL &nbsp; ◆</div>
+
+<!-- STORY -->
+<section class="story" id="story">
+  <div class="story-grid">
+    <div class="story-visual reveal">
+      <div class="story-card">
+        <div class="date-badge">19 Oktober 2022</div>
+        <p>Roka Ramen lahir di halaman rumah orang tua kami, di kawasan Umbulharjo yang tenang. Bukan dari restoran mewah, bukan dari modal besar — tapi dari keyakinan bahwa ramen yang benar-benar enak bisa hadir di Jogja.</p>
+        <p style="margin-top:1rem">Kami sulap halaman rumah jadi ruang makan, dan kuah kaldu mulai mendidih sejak subuh. Viral bukan karena kami mengejar — tapi karena rasa yang berbicara sendiri.</p>
+        <div class="founder-line">
+          Oleh <strong>Rendy Ekaputra</strong> & <strong>Diana Anggriani</strong> · Pasangan Pendiri Roka Ramen
+        </div>
+      </div>
+    </div>
+    <div class="timeline reveal">
+      <div class="section-label">Perjalanan Kami</div>
+      <h2 class="section-title" style="margin-bottom:3rem">Dari Dapur<br>ke Antrian Panjang</h2>
+      <div class="timeline-item">
+        <div class="tl-dot"></div>
+        <div class="tl-line"></div>
+        <div class="tl-content">
+          <div class="tl-date">Oktober 2022</div>
+          <div class="tl-title">Grand Opening di Umbulharjo</div>
+          <div class="tl-desc">Buka di rumah sendiri dengan menu terbatas tapi teknik tak terbatas. Pelanggan pertama langsung ketagihan.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-dot"></div>
+        <div class="tl-line"></div>
+        <div class="tl-content">
+          <div class="tl-date">Akhir 2022</div>
+          <div class="tl-title">Viral di TikTok & Twitter</div>
+          <div class="tl-desc">Kuah "ngaldu banget" dan porsi jumbo membuat food vlogger Jogja ramai mereview. Antrean muncul bahkan sebelum buka.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-dot"></div>
+        <div class="tl-line"></div>
+        <div class="tl-content">
+          <div class="tl-date">2023</div>
+          <div class="tl-title">250–300 Mangkuk Per Hari</div>
+          <div class="tl-desc">Waiting list panjang jadi pemandangan biasa. Roka resmi menjadi hidden gem paling dicari di Jogja.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-date">2024–2025</div>
+          <div class="tl-title">Konsisten, Berkembang</div>
+          <div class="tl-desc">Menu makin beragam, kualitas tetap terjaga. Setiap mangkuk masih dibuat dengan tangan yang sama dan waktu yang sama.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="process-inner">
+    <div class="process-header reveal">
+      <div class="section-label" style="justify-content:center">Proses & Keahlian</div>
+      <h2 class="section-title" style="text-align:center">Waktu Adalah Rahasia Kami</h2>
+    </div>
+    <div class="process-cards">
+      <div class="process-card reveal">
+        <div class="process-num">01</div>
+        <div class="process-icon">🍲</div>
+        <div class="process-time">8 Jam</div>
+        <h3>Kaldu Tulang & Ayam</h3>
+        <p>Direbus perlahan selama delapan jam penuh. Tidak ada shortcut. Hasilnya adalah kuah bening yang dalam, kaya mineral, dan hangat dari dalam.</p>
+      </div>
+      <div class="process-card reveal">
+        <div class="process-num">02</div>
+        <div class="process-icon">🥄</div>
+        <div class="process-time">24 Jam</div>
+        <h3>Tare — Saus Jiwa Ramen</h3>
+        <p>Tare dimasak dan dimatangkan selama satu hari penuh. Ini yang memberi kedalaman rasa shoyu atau shio yang tak bisa ditiru.</p>
+      </div>
+      <div class="process-card reveal">
+        <div class="process-num">03</div>
+        <div class="process-icon">🥚</div>
+        <div class="process-time">2 Hari</div>
+        <h3>Ajitama — Telur Ramen</h3>
+        <p>Telur direndam dalam bumbu rahasia selama dua hari. Hasilnya: kuning telur lembut setengah matang yang berasa hingga ke inti.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="jp-divider">◆ &nbsp; すべては手作り &nbsp; ◆ &nbsp; SEMUA HOUSE-MADE &nbsp; ◆</div>
+
+<!-- MENU -->
+<section class="menu" id="menu">
+  <div class="menu-inner">
+    <div class="menu-header">
+      <div>
+        <div class="section-label">Pilihan Kami</div>
+        <h2 class="section-title">Menu Roka</h2>
+      </div>
+      <div style="font-size:0.82rem;color:var(--stone);max-width:250px;text-align:right;line-height:1.6">
+        Harga mulai Rp25.000<br>Sambal disajikan terpisah
+      </div>
+    </div>
+    <div class="menu-tabs">
+      <button class="tab-btn active">Ramen</button>
+      <button class="tab-btn">Pelengkap</button>
+      <button class="tab-btn">Dessert & Minuman</button>
+    </div>
+    <div class="menu-grid reveal">
+      <div class="menu-item bestseller">
+        <div>
+          <div class="menu-name">Ultimate Izumi Shoyu Ramen</div>
+          <div class="menu-desc">Kuah shoyu rich, mie kenyal, chashu ayam. Varian: Regular / Spesial / Tamtam</div>
+        </div>
+        <div class="menu-price">Rp29k–39k</div>
+      </div>
+      <div class="menu-item bestseller">
+        <div>
+          <div class="menu-name">Ultimate Kimura Shoyu Ramen</div>
+          <div class="menu-desc">Signature shoyu dengan kompleksitas rasa lebih dalam. Favorit foodies Jogja.</div>
+        </div>
+        <div class="menu-price">Rp29k–39k</div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-name">Classic Tori Shio Ramen</div>
+          <div class="menu-desc">Kuah shio bening ringan, umami alami dari kaldu ayam pilihan.</div>
+        </div>
+        <div class="menu-price">Rp29k–39k</div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-name">Royal Tori Mayu Shio Ramen</div>
+          <div class="menu-desc">Shio premium dengan minyak bawang putih mayu yang aromatik.</div>
+        </div>
+        <div class="menu-price">Rp35k+</div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-name">Dragon Tantanmen Spesial</div>
+          <div class="menu-desc">Kuah sesame creamy dengan tingkat pedas yang bisa disesuaikan. Berani?</div>
+        </div>
+        <div class="menu-price">Rp35k+</div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-name">Abura Soba & Mazesoba</div>
+          <div class="menu-desc">Ramen tanpa kuah. Kering tapi penuh rasa. Tekstur unik, aduk sebelum makan.</div>
+        </div>
+        <div class="menu-price">Rp29k+</div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-name">Kirin Shoyu Ramen</div>
+          <div class="menu-desc">Alternatif ringan dengan karakter shoyu yang clean dan elegan.</div>
+        </div>
+        <div class="menu-price">Rp29k+</div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="menu-name">Samurai Komakura</div>
+          <div class="menu-desc">Menu spesial dengan topping lengkap. Porsi besar untuk selera besar.</div>
+        </div>
+        <div class="menu-price">Rp39k+</div>
+      </div>
+    </div>
+    <div class="menu-note">
+      <strong>Tips:</strong> Kekencangan mie dan tingkat pedas bisa disesuaikan. Sambal disajikan terpisah agar cita rasa kuah tetap seimbang. Ocha dingin/hangat <strong>free refill</strong> selama makan!
+    </div>
+  </div>
+</section>
+
+<!-- VIBE -->
+<section class="vibe" id="vibe">
+  <div class="vibe-inner">
+    <div class="reveal">
+      <div class="section-label">Pengalaman</div>
+      <h2 class="section-title">Bukan Restoran<br>Biasa</h2>
+      <p style="margin-top:1.5rem;font-size:0.95rem;line-height:1.8;color:rgba(245,234,214,0.6);font-weight:300">
+        Roka Ramen hadir di rumah yang sesungguhnya. Halaman yang disulap jadi ruang makan, langit terbuka di atas kepala, dan aroma kaldu yang sudah mendidih sejak pagi menyambut kedatanganmu.
+      </p>
+      <p style="margin-top:1rem;font-size:0.95rem;line-height:1.8;color:rgba(245,234,214,0.6);font-weight:300">
+        Ini bukan fine dining. Ini lebih baik dari itu — ini adalah rumah yang hangat, makan yang jujur, dan rasa yang tidak pernah bohong.
+      </p>
+      <div class="vibe-pills">
+        <span class="pill">Homey & Cozy</span>
+        <span class="pill">Hidden Gem</span>
+        <span class="pill">Open Air Seating</span>
+        <span class="pill">House-Made Everything</span>
+        <span class="pill">Viral TikTok</span>
+        <span class="pill">Free Refill Ocha</span>
+      </div>
+    </div>
+    <div class="vibe-features reveal">
+      <div class="vibe-feature">
+        <div class="feat-icon">🏠</div>
+        <div>
+          <div class="feat-title">Rumah yang Jadi Restoran</div>
+          <div class="feat-desc">Halaman rumah keluarga Rendy & Diana disulap jadi tempat makan yang cozy. Tidak ada yang dibuat-buat di sini.</div>
+        </div>
+      </div>
+      <div class="vibe-feature">
+        <div class="feat-icon">🍜</div>
+        <div>
+          <div class="feat-title">Porsi Jumbo, Harga Bersahabat</div>
+          <div class="feat-desc">Mulai Rp25.000, kamu dapat mangkuk besar dengan mie yang bisa diatur kekencangan dan sambal terpisah.</div>
+        </div>
+      </div>
+      <div class="vibe-feature">
+        <div class="feat-icon">☕</div>
+        <div>
+          <div class="feat-title">Ocha Free Refill</div>
+          <div class="feat-desc">Minum teh Jepang sepuasnya selama menikmati ramen. Hangat atau dingin, sesuai selera.</div>
+        </div>
+      </div>
+      <div class="vibe-feature">
+        <div class="feat-icon">⏰</div>
+        <div>
+          <div class="feat-title">Datang Lebih Awal</div>
+          <div class="feat-desc">Dengan 250–300 mangkuk per hari, ramen bisa habis sebelum tutup. Antrean adalah tanda kualitas di sini.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section class="visit" id="visit">
+  <div class="visit-inner">
+    <div class="reveal">
+      <div class="section-label">Kunjungi Kami</div>
+      <h2 class="section-title">Temukan Roka</h2>
+    </div>
+    <div class="info-grid reveal">
+      <div class="info-card">
+        <div class="info-icon">📍</div>
+        <div class="info-label">Lokasi</div>
+        <div class="info-val">Jl. Sidokabul No.8</div>
+        <div class="info-sub">Sorosutan, Umbulharjo<br>Yogyakarta</div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">🕙</div>
+        <div class="info-label">Jam Buka</div>
+        <div class="info-val">10.00 – Habis</div>
+        <div class="info-sub">Senin – Minggu<br>Weekend bisa lebih ramai</div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">📱</div>
+        <div class="info-label">Media Sosial</div>
+        <div class="info-val">@RokaRamen</div>
+        <div class="info-sub">TikTok & Instagram<br>untuk info harian</div>
+      </div>
+    </div>
+    <div class="visit-cta reveal">
+      <p>"Datang lebih awal,<br>atau pulang tanpa ramen."</p>
+      <a href="https://maps.google.com" target="_blank" class="btn-primary">Buka di Google Maps</a>
+      <div class="hint">* Ramen bisa habis sebelum jam tutup. Kami menyarankan datang 15–30 menit sebelum buka.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">ROKA RAMEN</div>
+  <div class="footer-copy">© 2025 Roka Ramen · Umbulharjo, Yogyakarta</div>
+  <div class="footer-jp">ろかラーメン · 情熱の一杯</div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Tab functionality
+  const tabs = document.querySelectorAll('.tab-btn');
+  const menuGrid = document.querySelector('.menu-grid');
+
+  const menuData = {
+    0: [
+      { name: 'Ultimate Izumi Shoyu Ramen', desc: 'Kuah shoyu rich, mie kenyal, chashu ayam. Varian: Regular / Spesial / Tamtam', price: 'Rp29k–39k', best: true },
+      { name: 'Ultimate Kimura Shoyu Ramen', desc: 'Signature shoyu dengan kompleksitas rasa lebih dalam. Favorit foodies Jogja.', price: 'Rp29k–39k', best: true },
+      { name: 'Classic Tori Shio Ramen', desc: 'Kuah shio bening ringan, umami alami dari kaldu ayam pilihan.', price: 'Rp29k–39k', best: false },
+      { name: 'Royal Tori Mayu Shio Ramen', desc: 'Shio premium dengan minyak bawang putih mayu yang aromatik.', price: 'Rp35k+', best: false },
+      { name: 'Dragon Tantanmen Spesial', desc: 'Kuah sesame creamy dengan tingkat pedas yang bisa disesuaikan.', price: 'Rp35k+', best: false },
+      { name: 'Abura Soba & Mazesoba', desc: 'Ramen tanpa kuah. Kering tapi penuh rasa. Aduk sebelum makan.', price: 'Rp29k+', best: false },
+      { name: 'Kirin Shoyu Ramen', desc: 'Alternatif ringan dengan karakter shoyu yang clean dan elegan.', price: 'Rp29k+', best: false },
+      { name: 'Samurai Komakura', desc: 'Menu spesial dengan topping lengkap. Porsi besar untuk selera besar.', price: 'Rp39k+', best: false },
+    ],
+    1: [
+      { name: 'Chicken Chashu', desc: 'Ayam chashu empuk yang dimasak slow cook dengan saus khas.', price: 'Rp8k+', best: false },
+      { name: 'Ajitama (Telur Ramen)', desc: 'Telur setengah matang direndam bumbu rahasia selama 2 hari.', price: 'Rp5k', best: false },
+      { name: 'Nori', desc: 'Rumput laut kering Jepang berkualitas.', price: 'Rp3k', best: false },
+      { name: 'Kikurage', desc: 'Jamur kayu khas ramen dengan tekstur unik.', price: 'Rp5k', best: false },
+      { name: 'Corn Ribs', desc: 'Jagung crispy panggang sebagai pendamping sempurna.', price: 'Rp10k+', best: false },
+      { name: 'House-made Gyoza', desc: 'Gyoza buatan sendiri, tersedia 4 atau 8 pcs.', price: 'Rp15k–25k', best: false },
+      { name: 'Tambah Mie / Soup', desc: 'Extra mie atau kuah untuk yang masih kurang.', price: 'Rp5k+', best: false },
+      { name: 'Extra Tare', desc: 'Tambahan saus tare untuk intensitas rasa lebih dalam.', price: 'Rp5k', best: false },
+    ],
+    2: [
+      { name: 'Japanese Purin', desc: 'Pudding telur Jepang lembut dengan saus karamel rumahan.', price: 'Rp15k+', best: false },
+      { name: 'Matcha Ice Cream', desc: 'Es krim matcha dengan rasa pahit manis yang autentik.', price: 'Rp15k+', best: false },
+      { name: 'Vanilla Ice Cream', desc: 'Es krim vanilla creamy sebagai penutup yang menenangkan.', price: 'Rp15k+', best: false },
+      { name: 'Salted Caramel Ice Cream', desc: 'Es krim karamel garam — manis, asin, dan adiktif.', price: 'Rp15k+', best: false },
+      { name: 'Cold Ocha', desc: 'Teh hijau Jepang dingin yang menyegarkan.', price: 'Free Refill', best: true },
+      { name: 'Hot Ocha', desc: 'Teh hijau Jepang hangat, cocok dinikmati bersama ramen.', price: 'Free Refill', best: true },
+      { name: 'Iced Tea', desc: 'Teh manis dingin segar khas kedai.', price: 'Rp8k', best: false },
+      { name: 'Mineral Water', desc: 'Air mineral dingin atau hangat.', price: 'Rp5k', best: false },
+    ]
+  };
+
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const data = menuData[i];
+      menuGrid.innerHTML = data.map(item => `
+        <div class="menu-item ${item.best ? 'bestseller' : ''}">
+          <div>
+            <div class="menu-name">${item.name}</div>
+            <div class="menu-desc">${item.desc}</div>
+          </div>
+          <div class="menu-price">${item.price}</div>
+        </div>
+      `).join('');
+    });
+  });
+</script>
+</body>
+</html>
